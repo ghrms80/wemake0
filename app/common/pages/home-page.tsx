@@ -3,8 +3,6 @@ import { ProductCard } from "~/features/products/components/product-card";
 import { Button } from "../components/ui/button";
 import { PostCard } from "~/features/community/components/post-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { TeamCard } from "~/features/teams/components/team-card";
 
@@ -32,6 +30,7 @@ export default function HomePage() {
         </div>
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
+            key={`productId-${index}`}
             id={`productId-${index}`}
             title="Product Name"
             description="Product Description"
@@ -55,14 +54,15 @@ export default function HomePage() {
         </div>
         {Array.from({ length: 5 }).map((_, index) => (
           <PostCard
-          id={`postId-${index}`}
-          title="What is the best productivity tool?"
-          author="Nico"
-          authorAvatarUrl="https://github.com/apple.png"
-          authorAvatarFallback="J"
-          category="Productivity"
-          postedAt="12 hours ago"
-        />
+            key={`postId-${index}`}
+            id={`postId-${index}`}
+            title="What is the best productivity tool?"
+            author="Nico"
+            authorAvatarUrl="https://github.com/apple.png"
+            authorAvatarFallback="J"
+            category="Productivity"
+            postedAt="12 hours ago"
+          />
         ))}
       </div>
       <div className="grid grid-cols-2 gap-4">
@@ -79,13 +79,14 @@ export default function HomePage() {
         </div>
         {Array.from({ length: 3 }).map((_, index) => (
           <IdeaCard
-          id="ideaId"
-          title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a manage the business."
-          viewCount={123}
-          postedAt="12 hours ago"
-          likeCount={12}
-          claimed={index % 2 == 0}
-        />
+            key={`ideaId-${index}`}
+            id={`ideaId-${index}`}
+            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a manage the business."
+            viewCount={123}
+            postedAt="12 hours ago"
+            likeCount={12}
+            claimed={index % 2 == 0}
+          />
         ))}
       </div>
       <div className="grid grid-cols-2 gap-4">
