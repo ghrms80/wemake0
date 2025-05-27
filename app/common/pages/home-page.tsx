@@ -13,13 +13,22 @@ export const meta: MetaFunction = () => {
   ];
 }
 
-export default function HomePage() {
+export const loader = () => {
+  console.log("Hello");
+  return {
+    hello: "world",
+  };
+};
+
+type LoaderData = typeof loader extends () => Promise<infer T> | infer T ? T : never;
+
+export default function HomePage({ loaderData }: { loaderData: LoaderData }) {
   return (
     <div className="px-20 space-y-30">
       <div className="grid grid-cols-2 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
-            Today's Products
+            Today's Products {JSON.stringify(loaderData)}
           </h2>
           <p className="text-xl font-light text-foreground">
             The best products made by our community today.
