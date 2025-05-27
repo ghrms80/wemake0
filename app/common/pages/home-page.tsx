@@ -5,6 +5,7 @@ import { PostCard } from "~/features/community/components/post-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { TeamCard } from "~/features/teams/components/team-card";
+import type { Route } from "./+types/home-page";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,12 +18,11 @@ export const loader = () => {
   console.log("Hello");
   return {
     hello: "world",
+    data: 1234,
   };
 };
 
-type LoaderData = typeof loader extends () => Promise<infer T> | infer T ? T : never;
-
-export default function HomePage({ loaderData }: { loaderData: LoaderData }) {
+export default function HomePage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="px-20 space-y-30">
       <div className="grid grid-cols-2 gap-4">
