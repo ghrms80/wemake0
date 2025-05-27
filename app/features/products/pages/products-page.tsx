@@ -1,7 +1,5 @@
-export default function ProductsPage() {
-  return (
-    <div>
-      <h1>Products Page</h1>
-    </div>
-  );
+import { redirect } from "react-router";
+
+export function loader() {
+    return redirect("/products/leaderboards");
 }
