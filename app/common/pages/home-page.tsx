@@ -6,6 +6,7 @@ import { IdeaCard } from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { TeamCard } from "~/features/teams/components/team-card";
 
+
 export const meta: MetaFunction = () => {
   return [
     { title: "Home | wemake" },
@@ -19,6 +20,7 @@ export default function HomePage() {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            Today's Products
           </h2>
           <p className="text-xl font-light text-foreground">
             The best products made by our community today.
