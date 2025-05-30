@@ -11,7 +11,24 @@ import ProductPagination from "~/common/components/product-pagination";
 const paramsSchema = z.object({
   year: z.coerce.number(),
   month: z.coerce.number(),
-});
+})
+
+export const meta: Route.MetaFunction = ({ params }) => {
+  const urlDate = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+  })
+    .setZone("Asia/Seoul")
+    .setLocale("ko-KR");
+  return [
+    {
+      title: `Best of ${urlDate.toLocaleString({
+        month: 'long',
+        year: '2-digit'  // or numeric
+      })}`
+    },
+  ];
+}
 
 
 export const loader = ({ params }: Route.LoaderArgs) => {

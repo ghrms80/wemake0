@@ -13,6 +13,26 @@ const paramsSchema = z.object({
   week: z.coerce.number(),
 });
 
+export const meta: Route.MetaFunction = ({ params }) => {
+  const urlDate = DateTime.fromObject({
+    weekYear: Number(params.year),
+    weekNumber: Number(params.week),
+  })
+    .setZone("Asia/Seoul")
+    .setLocale("ko-KR");
+  return [
+    {
+      title: `Best of week 
+          ${urlDate
+          .startOf('week')
+          .toLocaleString(DateTime.DATE_SHORT)} - 
+          ${urlDate
+          .endOf('week')
+          .toLocaleString(DateTime.DATE_SHORT)}`
+    },
+  ];
+}
+
 
 export const loader = ({ params }: Route.LoaderArgs) => {
   const { success, data:parsedData } = paramsSchema.safeParse(params);
@@ -78,8 +98,14 @@ export default function WeeklyLeaderboardPage({ loaderData }: Route.ComponentPro
 
   return (
     <div className="space-y-10">
-      <Hero 
-        title={`Best of week ${urlDate.startOf('week').toLocaleString(DateTime.DATE_SHORT)} - ${urlDate.endOf('week').toLocaleString(DateTime.DATE_SHORT)}`} 
+      <Hero
+        title={`Best of week 
+          ${urlDate
+            .startOf('week')
+            .toLocaleString(DateTime.DATE_SHORT)} - 
+          ${urlDate
+            .endOf('week')
+            .toLocaleString(DateTime.DATE_SHORT)}`}
       />
       <div className="flex items-center justify-center gap-2">
         <Button variant="secondary" asChild>

@@ -5,7 +5,6 @@ import { z } from "zod";
 import { Hero } from "~/common/components/hero";
 import { ProductCard } from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import ProductPagination from "~/common/components/product-pagination";
 
 const paramsSchema = z.object({
@@ -13,6 +12,21 @@ const paramsSchema = z.object({
   month: z.coerce.number(),
   day: z.coerce.number(),
 });
+
+export const meta: Route.MetaFunction = ({ params }) => {
+  const urlDate = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+    day: Number(params.day),
+  })
+    .setZone("Asia/Seoul")
+    .setLocale("ko-KR");
+  return [
+    {
+      title: `Best of ${urlDate.toLocaleString(DateTime.DATE_MED)} | wemake`,
+    },
+  ];
+};
 
 export const loader = ({ params }: Route.LoaderArgs) => {
   // const { year, month, day } = params;
